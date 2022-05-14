@@ -95,7 +95,7 @@ export default function App() {
           <Drawer.Screen
             name="Home"
             options={{
-              drawerIcon: ({color}) => <Octicons name="home" size={22} color={color} />,
+              drawerIcon: ({ color }) => <Octicons name="home" size={22} color={color} />,
             }}
           >
             {(props) => <Home {...props} data={data} />}
@@ -103,7 +103,7 @@ export default function App() {
           <Drawer.Screen
             name="Search"
             options={{
-              drawerIcon: ({color}) => <Octicons name="search" size={22} color={color} />
+              drawerIcon: ({ color }) => <Octicons name="search" size={22} color={color} />,
             }}
             component={() => <></>}
           />
