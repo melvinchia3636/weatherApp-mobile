@@ -1,8 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import moment from 'moment';
+
+import * as Icons from '../../../svg';
+import iconMap from '../../../svg/iconMap.json';
 
 function Daily({ data }) {
   return (
@@ -42,16 +45,15 @@ function Daily({ data }) {
               alignItems: 'center',
             }}
             >
-              <Image
-                source={{
-                  uri:
-                    `https:${item.day.condition.icon.replace('64x64', '128x128')}`,
-                }}
-                style={{
-                  width: 56,
-                  height: 56,
-                }}
-              />
+              {(() => {
+                const icon = iconMap[
+                  iconMap.findIndex((i) => item.day.condition.code === i.code)
+                ].dayIcon;
+                // convert icon name to camel case
+                const iconName = icon.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                const Icon = Icons[iconName];
+                return <Icon width="64" height="64" color="#3F3F46" />;
+              })()}
               <View
                 style={{
                   marginLeft: 8,

@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import {
-  View, Text, ScrollView, Image,
+  View, Text, ScrollView,
 } from 'react-native';
 import React from 'react';
 import moment from 'moment';
+import * as Icons from '../../../svg';
+import iconMap from '../../../svg/iconMap.json';
 
 function Hourly({ data }) {
   return (
@@ -43,16 +45,15 @@ function Hourly({ data }) {
                 borderRadius: 8,
               }}
             >
-              <Image
-                source={{
-                  uri:
-                    `https:${item.condition.icon.replace('64x64', '128x128')}`,
-                }}
-                style={{
-                  width: 56,
-                  height: 56,
-                }}
-              />
+              {(() => {
+                const icon = iconMap[
+                  iconMap.findIndex((i) => item.condition.code === i.code)
+                ][item.is_day ? 'dayIcon' : 'nightIcon'];
+                // convert icon name to camel case
+                const iconName = icon.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                const Icon = Icons[iconName];
+                return <Icon width="64" height="64" color="#3F3F46" />;
+              })()}
               <Text
                 style={{
                   fontFamily: 'Inter_600SemiBold',

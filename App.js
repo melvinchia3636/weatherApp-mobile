@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
@@ -24,6 +25,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Octicons } from '@expo/vector-icons';
+
 import Appbar from './components/Appbar';
 import TopSection from './components/TopSection';
 import BottomSection from './components/BottomSection';
@@ -57,7 +59,7 @@ export default function App() {
   const [data, setData] = useState();
   useEffect(() => {
     fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${'new york'}&days=3&aqi=yes&alerts=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${'johor bahru'}&days=3&aqi=yes&alerts=no`,
     )
       .then((res) => res.json())
       .then((d) => setData(d));

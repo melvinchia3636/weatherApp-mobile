@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import moment from 'moment';
 import { FontAwesome } from '@expo/vector-icons';
+
+import * as Icons from '../svg';
+import iconMap from '../svg/iconMap.json';
 
 function TopSection({ data }) {
   return (
@@ -16,20 +19,18 @@ function TopSection({ data }) {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 36,
+          marginTop: 42,
         }}
       >
-        <Image
-          source={{
-            uri:
-                  `https:${
-                    data.current.condition.icon.replace('64x64', '128x128')}`,
-          }}
-          style={{
-            width: 96,
-            height: 96,
-          }}
-        />
+        {(() => {
+          const icon = iconMap[
+            iconMap.findIndex((i) => data.current.condition.code === i.code)
+          ][data.current.is_day ? 'dayIcon' : 'nightIcon'];
+          // convert icon name to camel case
+          const iconName = icon.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+          const Icon = Icons[iconName];
+          return <Icon width="96" height="96" color="white" />;
+        })()}
         <Text
           style={{
             fontFamily: 'Inter_600SemiBold',
@@ -48,7 +49,7 @@ function TopSection({ data }) {
           textAlign: 'center',
           color: 'white',
           fontSize: 24,
-          marginTop: 12,
+          marginTop: 8,
         }}
       >
         {data.current.condition.text}
