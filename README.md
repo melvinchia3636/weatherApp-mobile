@@ -1,6 +1,6 @@
 <center><h1 align="center">🌦 Weather Mobile App</h1></center>
 
-<p align="center">Just a weather app, nothing too speacial</p>
+<p align="center">Just a weather app, nothing too special</p>
 
 ## The Problem
 
